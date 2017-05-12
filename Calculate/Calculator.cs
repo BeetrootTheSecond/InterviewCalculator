@@ -22,9 +22,8 @@ namespace Calculate
         public int MyUserInteger;
 
         public Calculator()
-        {// set default radio button 
+        { 
             InitializeComponent();
-            //radioButton1.Checked = true;
         }
                 
 
@@ -35,14 +34,15 @@ namespace Calculate
             
             for (int i = 1; i < 13;i++) 
             {
-                ResultTXT.Text+= generateText(i, MyUserInteger, CurrentOperator);
+                ResultTXT.Text+= GenerateText(i, MyUserInteger, CurrentOperator);
             }
         }
 
-        private string generateText(int i, int userInput, Operators Operator)
+        private string GenerateText(int i, int userInput, Operators Operator)
         {
             int result=0;
-            
+
+            // Switches on the operator need for the equation and performs the equation 
             switch (Operator)
             {
                 case Operators.Add:
@@ -58,7 +58,7 @@ namespace Calculate
                     result = i / userInput;
                     break;
             }
-         //Formats the output 
+         //Formats the output to show the iterative(i) then the Operator and userInput followed by the result of the calculation 
             return string.Format("{0} {1} {2} = {3} ", i, (char)Operator, userInput, result) + Environment.NewLine;
         }
 
@@ -79,6 +79,8 @@ namespace Calculate
             }
         }
         
+
+        //Updates the currentIperator when a new radio button is selected
         private void AddRB_CheckedChanged(object sender, EventArgs e)
         {
             if (AddRB.Checked)
