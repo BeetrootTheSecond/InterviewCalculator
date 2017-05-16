@@ -14,8 +14,8 @@ namespace Calculate
         {
             Add = '+',
             Subtract = '-',
-            Multiply = '*',
-            Divide = '/'
+            Multiply = 'x',
+            Divide = '÷'
         };
         Operators CurrentOperator = Operators.Add;
         
@@ -30,47 +30,46 @@ namespace Calculate
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             //clears result text box
-            ResultTXT.Text = "";
+            ResultTXT.Text = string.Empty;
             
             //prints the calculations for 1 to 12
             for (int i = 1; i < 13;i++) 
             {
-                ResultTXT.Text+= GenerateText(i, MyUserInteger, CurrentOperator);
+                ResultTXT.Text+= GenerateText(i, MyUserInteger);
             }
         }
 
-        private string GenerateText(int i, int userInput, Operators Operator)
+        private string GenerateText(int i, int userInput)
         {
-            int result=0;
+            //Formats the output to show the iterative(i) then the Operator and userInput followed by the result of the 
+            return string.Format("{0} {1} {2} = {3} ", i, (char)CurrentOperator, userInput, Calculate(i, userInput)) + Environment.NewLine;
+        }
 
-         // Switches on the operator need for the equation and performs the equation 
-            switch (Operator)
+        // Apply operator to values
+        private float Calculate(int a, int b)
+        {
+            switch (CurrentOperator)
             {
                 case Operators.Add:
-                    result = i + userInput;
-                    break;
+                    return a + b;
                 case Operators.Subtract:
-                    result = i - userInput;
-                    break;
+                    return a - b;
                 case Operators.Multiply:
-                    result = i * userInput;
-                    break;
-                case Operators.Divide:
-                    result = i / userInput;
-                    break;
+                    return a * b;
+                // Operators.Divide
+                default: 
+                    return a / b;
             }
-         //Formats the output to show the iterative(i) then the Operator and userInput followed by the result of the calculation 
-            return string.Format("{0} {1} {2} = {3} ", i, (char)Operator, userInput, result) + Environment.NewLine;
         }
 
 
         private void UserInputTXT_TextChanged(object sender, EventArgs e)
         {
-        //Check MyUserinput is all integers and between 1 and 10, if any wrongs occur  the exception is handled. 
+            //Check MyUserinput is an integer and between 1 and 10, unexpected values are handled by exceptions
             try
             {
                 MyUserInteger = int.Parse(UserInputTXT.Text);
-                if (MyUserInteger < 11 && MyUserInteger > 0)
+                if (MyUserInteger > 0 && MyUserInteger < 11)
                     CalculateButton.Enabled = true;
                 else
                     throw new ArgumentOutOfRangeException();
@@ -82,7 +81,7 @@ namespace Calculate
         }
         
 
-        //Updates the currentIperator when a new radio button is selected
+        //Updates the current operator when a new radio button is selected
         private void AddRB_CheckedChanged(object sender, EventArgs e)
         {
             if (AddRB.Checked)
