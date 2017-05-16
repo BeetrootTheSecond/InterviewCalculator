@@ -32,6 +32,7 @@ namespace Calculate
             //clears result text box
             ResultTXT.Text = "";
             
+            //prints the calculations for 1 to 12
             for (int i = 1; i < 13;i++) 
             {
                 ResultTXT.Text+= GenerateText(i, MyUserInteger, CurrentOperator);
@@ -42,7 +43,7 @@ namespace Calculate
         {
             int result=0;
 
-            // Switches on the operator need for the equation and performs the equation 
+         // Switches on the operator need for the equation and performs the equation 
             switch (Operator)
             {
                 case Operators.Add:
@@ -65,6 +66,7 @@ namespace Calculate
 
         private void UserInputTXT_TextChanged(object sender, EventArgs e)
         {
+        //Check MyUserinput is all integers and between 1 and 10, if any wrongs occur  the exception is handled. 
             try
             {
                 MyUserInteger = int.Parse(UserInputTXT.Text);
