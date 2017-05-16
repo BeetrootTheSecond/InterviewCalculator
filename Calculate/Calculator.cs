@@ -46,7 +46,7 @@ namespace Calculate
         }
 
         // Apply operator to values
-        private float Calculate(int a, int b)
+        private int Calculate(int a, int b)
         {
             switch (CurrentOperator)
             {
