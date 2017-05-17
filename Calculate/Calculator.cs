@@ -42,11 +42,11 @@ namespace Calculate
         private string GenerateText(int i, int userInput)
         {
             //Formats the output to show the iterative(i) then the Operator and userInput followed by the result of the 
-            return string.Format("{0} {1} {2} = {3} ", i, (char)CurrentOperator, userInput, Calculate(i, userInput)) + Environment.NewLine;
+            return string.Format("{0} {1} {2} = {3:0.##} ", i, (char)CurrentOperator, userInput, Calculate(i, userInput)) + Environment.NewLine;
         }
 
         // Apply operator to values
-        private int Calculate(int a, int b)
+        private float Calculate(float a, float b)
         {
             switch (CurrentOperator)
             {
